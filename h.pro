@@ -1,4 +1,4 @@
-QT += quick qml
+QT += quick qml xml
 
 CONFIG += c++11
 
@@ -8,6 +8,7 @@ CONFIG += c++11
 
 SOURCES += \
         BackEnd.cpp \
+        ConfigLoader.cpp \
         Worker.cpp \
         main.cpp
 
@@ -26,8 +27,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     main.qml \
-    Gauge.qml
 
 HEADERS += \
     BackEnd.h \
+    ConfigLoader.h \
     Worker.h

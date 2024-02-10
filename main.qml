@@ -9,12 +9,17 @@ import QtQuick.Layouts 1.0
 ApplicationWindow {
     id: window
     width: 910
-    height: 460
+    height: 360
     visible: true
-    minimumHeight: 110
-    minimumWidth: 210
-    maximumHeight: 470
+//    minimumHeight: 110
+//    minimumWidth: 210
+    maximumHeight: 370
     maximumWidth: 910
+    background: Rectangle {
+        anchors.fill: parent
+        color:"dimgrey"
+    }
+
     BackEnd {
         id: backend
     }
@@ -28,11 +33,16 @@ ApplicationWindow {
             id: aoa
             value: backend.aoaValue
             Layout.fillWidth:true
-            Layout.fillHeight: true
+            //Layout.fillHeight: true
             Layout.minimumHeight: 100
             Layout.minimumWidth: 100
-            Layout.preferredHeight: 450
+            Layout.preferredHeight: 350
             Layout.preferredWidth: 450
+            style: CircularGaugeStyle {
+                minimumValueAngle: -90
+                maximumValueAngle: 90
+
+            }
 
 
             property bool accelerating: false
@@ -58,12 +68,18 @@ ApplicationWindow {
             id: aos
             value: backend.aoaValue
             Layout.fillWidth:true
-            Layout.fillHeight: true
+            //Layout.fillHeight: true
             Layout.minimumHeight: 100
             Layout.minimumWidth: 100
-            Layout.preferredHeight: 450
+            Layout.preferredHeight: 350
             Layout.preferredWidth: 450
             property bool accelerating: false
+
+            style: CircularGaugeStyle {
+                minimumValueAngle: -90
+                maximumValueAngle: 90
+
+            }
 
             Keys.onSpacePressed: accelerating = true
             Keys.onReleased: {

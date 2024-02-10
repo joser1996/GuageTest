@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <qqml.h>
-
+#include "ConfigLoader.h"
 
 class BackEnd : public QObject
 {
@@ -23,6 +23,10 @@ public slots:
 
 private:
     double m_aoaValue;
+    ConfigLoader config;
+
+    void dataFromFile();
+    void dataFromPort();
 };
 
 #endif // BACKEND_H
