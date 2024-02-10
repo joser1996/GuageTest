@@ -3,7 +3,6 @@ import QtQml 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
-import example.backend 1.0
 import QtQuick.Layouts 1.0
 
 ApplicationWindow {
@@ -17,13 +16,8 @@ ApplicationWindow {
     maximumWidth: 910
     background: Rectangle {
         anchors.fill: parent
-        color:"dimgrey"
+        color:backend.bColor
     }
-
-    BackEnd {
-        id: backend
-    }
-
 
     RowLayout{
         anchors.fill: parent
@@ -76,9 +70,8 @@ ApplicationWindow {
             property bool accelerating: false
 
             style: CircularGaugeStyle {
-                minimumValueAngle: -90
-                maximumValueAngle: 90
-
+                minimumValueAngle: backend.aosGauge.minAngle
+                maximumValueAngle: backend.aosGauge.maxAngle
             }
 
             Keys.onSpacePressed: accelerating = true

@@ -46,19 +46,19 @@ bool ConfigLoader::loadConfigFile() {
                 } else if (xml.name() == "gauge") {
                     QStringRef strRef = xml.attributes().value("name");
                     Gauge current;
-                    current.name = strRef.toString();
+                    current.m_name = strRef.toString();
                     while (xml.readNextStartElement()) {
                         int val = xml.readElementText().toInt();
                         if (xml.name() == "minAngle") {
-                            current.minAngle = val;
+                            current.m_minAngle = val;
                         } else if (xml.name() == "maxAngle") {
-                            current.maxAngle = val;
+                            current.m_maxAngle = val;
                         } else if (xml.name() == "minValue") {
-                            current.minValue = val;
+                            current.m_minValue = val;
                         } else if (xml.name() == "maxValue") {
-                            current.maxValue = val;
+                            current.m_maxValue = val;
                         } else if (xml.name() == "redZone") {
-                            current.redZone = val;
+                            current.m_redZone = val;
                         }
                     }
                     this->configObj.gauges.append(current);
