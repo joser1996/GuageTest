@@ -23,30 +23,35 @@ ApplicationWindow {
 
         CustomGauge {
             id: aoa
+            myName: "AoA"
             value: backend.aoaValue
 
-            minimumValue: backend.aoaGauge.minValue
-            maximumValue: backend.aoaGauge.maxValue
+            minVal: backend.aoaGauge.minValue
+            maxVal: backend.aoaGauge.maxValue
 
-            style: CircularGaugeStyle {
+            customStyle: CircularGaugeStyle {
                 minimumValueAngle: backend.aoaGauge.minAngle
                 maximumValueAngle: backend.aoaGauge.maxAngle
             }
 
+            valStr: backend.aoaStr
 
         }
 
         CustomGauge {
             id: aos
+            myName: "AoS"
             value: backend.aoaValue
 
-            minimumValue: backend.aosGauge.minValue
-            maximumValue: backend.aosGauge.maxValue
+            minVal: backend.aosGauge.minValue
+            maxVal: backend.aosGauge.maxValue
 
-            style: CircularGaugeStyle {
+            customStyle: CircularGaugeStyle {
                 minimumValueAngle: backend.aosGauge.minAngle
                 maximumValueAngle: backend.aosGauge.maxAngle
             }
+
+            valStr: backend.aosStr
 
         }
     }

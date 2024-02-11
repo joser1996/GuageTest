@@ -13,6 +13,7 @@ class Worker: public QObject
     Q_OBJECT
 public:
     Worker();
+    Worker(unsigned int hz);
     ~Worker();
 
 public slots:
@@ -25,6 +26,7 @@ signals:
 private:
     double data;
     std::ifstream myFile;
+    double sampleRate;
 
 };
 

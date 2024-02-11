@@ -74,25 +74,40 @@ void ::BackEnd::setAoAGauge(const Gauge& g) {
     emit aoaGaugeChanged();
 }
 
-//Sample Rate
-double BackEnd::sampleRate() {
-    return this->config.configObj.sampleRateHz;
+//AoA Str
+QString BackEnd::aoaStr() {
+    return m_aoaStr;
 }
 
-void BackEnd::setSampleRate(const double &val) {
-    this->config.configObj.sampleRateHz = val;
-    emit sampleRateChanged();
+void BackEnd::setAoAStr(const QString &val) {
+    m_aoaStr = val;
+    emit aoaStrChanged();
 }
 
+//AoS Val
+QString BackEnd::aosStr() {
+    return m_aosStr;
+}
+
+void BackEnd::setAoSStr(const QString &val) {
+    m_aosStr = val;
+    emit aosStrChanged();
+}
 
 /*****************Thread Updates*******************/
-void BackEnd::updateFromWorker(double val) {
+void BackEnd::updateFromWorker(double val) { //FOR AOA Value
     this->setAOAValue(val);
+
+    QString valStr = QString::number(val) + " units/sec";
+
+    this->setAoAStr(valStr);
+    this->setAoSStr(valStr);
 }
 
-void BackEnd::dataFromFile() {
+void
+BackEnd::dataFromFile() {
     QThread* thread = new QThread;
-    Worker* worker = new Worker;
+    Worker* worker = new Worker(this->config.configObj.sampleRateHz);
 
     worker->moveToThread(thread);
 

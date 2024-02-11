@@ -13,7 +13,8 @@ class BackEnd : public QObject
     Q_PROPERTY(QString bColor READ bColor WRITE setbColor NOTIFY bColorValueChanged)
     Q_PROPERTY(Gauge aosGauge READ aosGauge WRITE setAoSGauge NOTIFY aosGaugeChanged)
     Q_PROPERTY(Gauge aoaGauge READ aoaGauge WRITE setAoAGauge NOTIFY aoaGaugeChanged)
-    Q_PROPERTY(double sampleRate READ sampleRate WRITE setSampleRate NOTIFY sampleRateChanged)
+    Q_PROPERTY(QString aoaStr READ aoaStr WRITE setAoAStr NOTIFY aoaStrChanged)
+    Q_PROPERTY(QString aosStr READ aosStr WRITE setAoSStr NOTIFY aosStrChanged)
 
 public:
     explicit BackEnd(QObject *parent = nullptr);
@@ -22,14 +23,17 @@ public:
     QString bColor();
     Gauge aosGauge();
     Gauge aoaGauge();
-    double sampleRate();
+    QString aoaStr();
+    QString aosStr();
 
     void setAOAValue(const double& val);
     void setAOSValue(const double& val);
     void setbColor(const QString& color);
     void setAoSGauge(const Gauge& g);
     void setAoAGauge(const Gauge& g);
-    void setSampleRate(const double& val);
+    void setAoAStr(const QString& val);
+    void setAoSStr(const QString& val);
+
 
 signals:
     void aoaValueChanged();
@@ -37,7 +41,8 @@ signals:
     void bColorValueChanged();
     void aosGaugeChanged();
     void aoaGaugeChanged();
-    void sampleRateChanged();
+    void aoaStrChanged();
+    void aosStrChanged();
 
 public slots:
     void updateFromWorker(double val);
@@ -45,6 +50,8 @@ public slots:
 private:
     double m_aoaValue;
     double m_aosValue;
+    QString m_aoaStr;
+    QString m_aosStr;
 
     ConfigLoader config;
 

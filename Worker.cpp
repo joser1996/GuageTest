@@ -6,6 +6,21 @@ Worker::Worker()
 {
     data = 0;
     myFile.open("test.txt", std::ifstream::in);
+    sampleRate = 5; //20 ms Animation should be faster than this
+}
+
+Worker::Worker(unsigned int hz)
+{
+    data = 0;
+    myFile.open("test.txt", std::ifstream::in);
+    if (hz < 5) {
+        hz = 5;
+    }
+
+    if (hz > 10) {
+        hz = 10;
+    }
+    sampleRate = hz; //20 ms Animation should be faster than this
 }
 
 Worker::~Worker() {
@@ -24,7 +39,7 @@ void Worker::process() {
                     continue;
                 double tmp = std::stod(line);
                 emit updateValue(tmp);
-                QThread::msleep(60);
+                QThread::msleep((1/sampleRate) * 1000);
             }
         } else {
             qDebug() << "Couldn't open file";
