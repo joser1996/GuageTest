@@ -121,5 +121,43 @@ BackEnd::dataFromFile() {
 }
 
 void BackEnd::dataFromPort() {
+    QThread* thread = new QThread;
+    SerialReader* reader = new SerialReader;
+    reader->setPort(this->config.configObj.comPort);
 
+    reader->moveToThread(thread);
+
+    connect(thread, &QThread::started, reader, &SerialReader::process);
+    connect(reader, &SerialReader::updateAoA, this, &BackEnd::updateAoASerial);
+    connect(reader, &SerialReader::updateAoS, this, &BackEnd::updateAoSSerial);
+    connect(reader, &SerialReader::updateAoS_AoA, this, &BackEnd::updateAoS_AoASeraial);
+    connect(reader, &SerialReader::finished, reader, &SerialReader::deleteLater);
+    connect(reader, &SerialReader::finished, thread, &QThread::deleteLater);
+    connect(this, &BackEnd::createSerialReader, reader, &SerialReader::createSerialPort);
+
+    thread->start();
+    qDebug() << "Serail Thread started";
+
+}
+
+void BackEnd::updateAoASerial(double val) {
+    this->setAOAValue(val);
+    QString valStr = QString::number(val) + " units/sec";
+    this->setAoAStr(valStr);
+}
+
+void BackEnd::updateAoSSerial(double val) {
+    this->setAOSValue(val);
+    QString valStr = QString::number(val) + " units/sec";
+    this->setAoSStr(valStr);
+}
+
+void BackEnd::updateAoS_AoASeraial(double aos, double aoa) {
+    this->setAOAValue(aoa);
+    this->setAOSValue(aos);
+    QString aosStr = QString::number(aos) + " units/sec";
+    QString aoaStr = QString::number(aoa) + " units/sec";
+
+    this->setAoAStr(aosStr);
+    this->setAoSStr(aoaStr);
 }

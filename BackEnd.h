@@ -4,6 +4,7 @@
 #include <QObject>
 #include <qqml.h>
 #include "ConfigLoader.h"
+#include "SerialReader.h"
 
 class BackEnd : public QObject
 {
@@ -43,9 +44,12 @@ signals:
     void aoaGaugeChanged();
     void aoaStrChanged();
     void aosStrChanged();
-
+    void createSerialReader();
 public slots:
     void updateFromWorker(double val);
+    void updateAoASerial(double val);
+    void updateAoSSerial(double val);
+    void updateAoS_AoASeraial(double aos, double aoa);
 
 private:
     double m_aoaValue;

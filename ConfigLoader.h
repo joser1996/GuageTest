@@ -31,7 +31,7 @@ public:
 
 struct Config
 {
-    unsigned int comPort;
+    QString comPort;
     bool usingCOMPort;
     QString fileDataSource;
     unsigned int sampleRateHz;

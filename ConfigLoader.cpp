@@ -35,7 +35,7 @@ bool ConfigLoader::loadConfigFile() {
                     else
                         this->configObj.usingCOMPort = true;
                     QString portStr = xml.readElementText();
-                    this->configObj.comPort = portStr.toUInt();
+                    this->configObj.comPort = portStr;
                 }else if (xml.name() == "fileName") {
                     this->configObj.fileDataSource = xml.readElementText();
                 } else if (xml.name() == "sampleRateHz") {

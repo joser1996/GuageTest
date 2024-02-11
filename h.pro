@@ -1,4 +1,4 @@
-QT += quick qml xml
+QT += quick qml xml serialport
 
 CONFIG += c++11
 
@@ -9,6 +9,7 @@ CONFIG += c++11
 SOURCES += \
         BackEnd.cpp \
         ConfigLoader.cpp \
+        SerialReader.cpp \
         Worker.cpp \
         main.cpp
 
@@ -32,4 +33,5 @@ DISTFILES += \
 HEADERS += \
     BackEnd.h \
     ConfigLoader.h \
+    SerialReader.h \
     Worker.h
