@@ -10,8 +10,6 @@ ApplicationWindow {
     width: 910
     height: 360
     visible: true
-//    minimumHeight: 110
-//    minimumWidth: 210
     maximumHeight: 370
     maximumWidth: 910
     background: Rectangle {
@@ -23,72 +21,33 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 8
 
-        CircularGauge {
+        CustomGauge {
             id: aoa
             value: backend.aoaValue
-            Layout.fillWidth:true
-            //Layout.fillHeight: true
-            Layout.minimumHeight: 100
-            Layout.minimumWidth: 100
-            Layout.preferredHeight: 350
-            Layout.preferredWidth: 450
+
+            minimumValue: backend.aoaGauge.minValue
+            maximumValue: backend.aoaGauge.maxValue
+
             style: CircularGaugeStyle {
-                minimumValueAngle: -90
-                maximumValueAngle: 90
-
+                minimumValueAngle: backend.aoaGauge.minAngle
+                maximumValueAngle: backend.aoaGauge.maxAngle
             }
 
 
-            property bool accelerating: false
-
-            Keys.onSpacePressed: accelerating = true
-            Keys.onReleased: {
-                if (event.key === Qt.Key_Space) {
-                    accelerating = false;
-                    event.accepted = true;
-                }
-            }
-
-            Component.onCompleted: forceActiveFocus()
-
-            Behavior on value {
-                NumberAnimation {
-                    duration: 50
-                }
-            }
         }
 
-        CircularGauge {
+        CustomGauge {
             id: aos
             value: backend.aoaValue
-            Layout.fillWidth:true
-            //Layout.fillHeight: true
-            Layout.minimumHeight: 100
-            Layout.minimumWidth: 100
-            Layout.preferredHeight: 350
-            Layout.preferredWidth: 450
-            property bool accelerating: false
+
+            minimumValue: backend.aosGauge.minValue
+            maximumValue: backend.aosGauge.maxValue
 
             style: CircularGaugeStyle {
                 minimumValueAngle: backend.aosGauge.minAngle
                 maximumValueAngle: backend.aosGauge.maxAngle
             }
 
-            Keys.onSpacePressed: accelerating = true
-            Keys.onReleased: {
-                if (event.key === Qt.Key_Space) {
-                    accelerating = false;
-                    event.accepted = true;
-                }
-            }
-
-            Component.onCompleted: forceActiveFocus()
-
-            Behavior on value {
-                NumberAnimation {
-                    duration: 50
-                }
-            }
         }
     }
 }

@@ -4,8 +4,8 @@
 
 Worker::Worker()
 {
- data = 0;
- myFile.open("test.txt", std::ifstream::in);
+    data = 0;
+    myFile.open("test.txt", std::ifstream::in);
 }
 
 Worker::~Worker() {
@@ -14,22 +14,24 @@ Worker::~Worker() {
 
 void Worker::process() {
     qDebug("Starting process");
-    if (myFile.is_open()) {
-        while (myFile) {
-            std::string line;
-            std::getline(myFile, line);
-            if (line == "")
-                continue;
-            double tmp = std::stod(line);
-            if (tmp == 99) {
-                printf("Hello");
+
+    while (true) {
+        if (myFile.is_open()) {
+            while (myFile) {
+                std::string line;
+                std::getline(myFile, line);
+                if (line == "")
+                    continue;
+                double tmp = std::stod(line);
+                emit updateValue(tmp);
+                QThread::msleep(60);
             }
-            qDebug() << tmp;
-            emit updateValue(tmp);
-            QThread::msleep(60);
+        } else {
+            qDebug() << "Couldn't open file";
         }
-    } else {
-       qDebug() << "Couldn't open file";
+
+        myFile.clear();
+        myFile.seekg(0);
     }
 
     emit finished();

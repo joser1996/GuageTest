@@ -30,8 +30,17 @@ double BackEnd::aoaValue() {
 
 void BackEnd::setAOAValue(const double& val) {
     m_aoaValue = val;
-    qDebug("SLot called");
     emit aoaValueChanged();
+}
+
+//AoS Value
+double BackEnd::aosValue() {
+    return m_aosValue;
+}
+
+void BackEnd::setAOSValue(const double &val) {
+    m_aosValue = val;
+    emit aosValueChanged();
 }
 
 //Background Color
@@ -55,6 +64,28 @@ void BackEnd::setAoSGauge(const Gauge &g) {
     emit aosGaugeChanged();
 }
 
+//AoA Gauge Config
+Gauge BackEnd::aoaGauge() {
+    return this->config.configObj.gauges[0];
+}
+
+void ::BackEnd::setAoAGauge(const Gauge& g) {
+    config.configObj.gauges[0] = g;
+    emit aoaGaugeChanged();
+}
+
+//Sample Rate
+double BackEnd::sampleRate() {
+    return this->config.configObj.sampleRateHz;
+}
+
+void BackEnd::setSampleRate(const double &val) {
+    this->config.configObj.sampleRateHz = val;
+    emit sampleRateChanged();
+}
+
+
+/*****************Thread Updates*******************/
 void BackEnd::updateFromWorker(double val) {
     this->setAOAValue(val);
 }

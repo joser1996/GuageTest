@@ -127,12 +127,12 @@ bool ConfigLoader::createDefaultFile() {
 
     QDomElement minValue = xml.createElement("minValue");
     gauge.appendChild(minValue);
-    QDomText minValueText = xml.createTextNode("-90");
+    QDomText minValueText = xml.createTextNode("0");
     minValue.appendChild(minValueText);
 
     QDomElement maxValue = xml.createElement("maxValue");
     gauge.appendChild(maxValue);
-    QDomText maxValueText = xml.createTextNode("90");
+    QDomText maxValueText = xml.createTextNode("100");
     maxValue.appendChild(maxValueText);
 
 
@@ -158,7 +158,7 @@ bool ConfigLoader::createDefaultFile() {
 
     maxValue = xml.createElement("maxValue");
     gauge.appendChild(maxValue);
-    maxValueText = xml.createTextNode("180");
+    maxValueText = xml.createTextNode("100");
     maxValue.appendChild(maxValueText);
 
     QDomElement redZone = xml.createElement("redZone");
