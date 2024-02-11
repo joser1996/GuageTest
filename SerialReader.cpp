@@ -53,6 +53,10 @@ void SerialReader::startReceiver() {
             qDebug() << "New Data: " << serial->bytesAvailable();
             QByteArray data = serial->readAll();
             qDebug() << data;
+            double aos;
+            double aoa;
+            aos = aoa = data.toDouble();
+            emit updateAoS_AoA(aos, aoa);
             //parse data and get aos and aoa
         }
     }
